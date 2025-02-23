@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b82wikhj4obx"]
+
+[ext_resource type="Script" path="res://game/player/comp/default_shot.gd" id="1_162ca"]
+[ext_resource type="Texture2D" uid="uid://jom1chty4eeg" path="res://game/player/comp/M484BulletCollection.png" id="2_i16mr"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jgrf1"]
+blend_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qr5vl"]
+radius = 5.09902
+
+[node name="DefaultShot" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 48
+script = ExtResource("1_162ca")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_jgrf1")
+position = Vector2(0, 2)
+texture = ExtResource("2_i16mr")
+region_enabled = true
+region_rect = Rect2(400, 214, 10, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qr5vl")

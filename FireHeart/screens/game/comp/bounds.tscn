@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://bir3winy88id5"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0e0jo"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pofvl"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_my1cs"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v3aew"]
+normal = Vector2(-1, 0)
+
+[node name="Bounds" type="Node2D"]
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 816)
+collision_layer = 256
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
+shape = SubResource("WorldBoundaryShape2D_0e0jo")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(0, 320)
+collision_layer = 256
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+visible = false
+shape = SubResource("WorldBoundaryShape2D_pofvl")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(0, 576)
+collision_layer = 256
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+visible = false
+shape = SubResource("WorldBoundaryShape2D_my1cs")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(680, 576)
+collision_layer = 256
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+visible = false
+shape = SubResource("WorldBoundaryShape2D_v3aew")

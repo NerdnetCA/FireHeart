@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpqmk64f2r0de"]
+
+[ext_resource type="Script" path="res://lib/slep/processor.gd" id="1_pavf3"]
+
+[node name="SlepProcessor" type="Node"]
+script = ExtResource("1_pavf3")
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

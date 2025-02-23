@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bx30n7afpdlf3"]
+
+[ext_resource type="Texture2D" uid="uid://ber0j0qgtcbdp" path="res://game/comp/exp2_0.png" id="1_rt4yo"]
+[ext_resource type="Script" path="res://game/comp/explosion.gd" id="1_s7fte"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lsbj2"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 4
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ojync"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 64.0
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 12.0
+radial_accel_max = 24.0
+scale_min = 0.8
+scale_max = 1.6
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.5
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("1_s7fte")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_lsbj2")
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_ojync")
+texture = ExtResource("1_rt4yo")
+one_shot = true
+explosiveness = 0.75

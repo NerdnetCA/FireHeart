@@ -1,0 +1,107 @@
+[gd_scene load_steps=11 format=3 uid="uid://buhd2w1ri5aaj"]
+
+[ext_resource type="Script" path="res://screens/game/game.gd" id="1_h7ada"]
+[ext_resource type="PackedScene" uid="uid://dumhb4ml5d0xs" path="res://game/player/player_a.tscn" id="2_fsmmi"]
+[ext_resource type="Texture2D" uid="uid://cnni0n2ws5r2d" path="res://game/bg/backgroundSpace_01.1.png" id="2_jig67"]
+[ext_resource type="PackedScene" uid="uid://bpqmk64f2r0de" path="res://lib/slep/slep_processor.tscn" id="2_p8eyp"]
+[ext_resource type="Script" path="res://lib/slep/slep_null.gd" id="3_wi6y0"]
+[ext_resource type="Script" path="res://lib/slep/slep_player_fire.gd" id="4_4r3go"]
+[ext_resource type="Script" path="res://lib/slep/slep_spawn_drone.gd" id="5_7e0c3"]
+[ext_resource type="Resource" uid="uid://cit5op7pv185m" path="res://game/foes/drone/dummydrone.tres" id="9_pvb2a"]
+
+[sub_resource type="Curve2D" id="Curve2D_uwjip"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 128, -64, -0.707107, -32.5269, 0.707107, 32.5269, 128, 64, -29.6985, 0, 29.6985, 0, 192, 128, -33.234, -0.707107, 33.234, 0.707107, 576, 128, 0, -31.8198, 0, 31.8198, 648, 192, 40.3051, 0, -40.3051, 0, 576, 256, 17.0424, 0, -17.0424, 0, 464, 256, 29.7851, -34.5468, -29.7851, 34.5468, 384, 320, 23.0663, -23.4853, -23.0663, 23.4853, 128, 576, 0.840896, -23.5451, -0.840896, 23.5451, 64, 656, 0, 0, 0, 0, 64, 896)
+}
+point_count = 11
+
+[sub_resource type="Curve2D" id="Curve2D_auq8r"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 552, -64, 0.66742, -37.3755, -0.66742, 37.3755, 552, 72, 32.7036, -0.66742, -32.7036, 0.66742, 488, 128, 31.4645, 0, -31.4645, 0, 104, 128, 1.49831, -38.956, -1.49831, 38.956, 32, 192, -36.7085, 0, 36.7085, 0, 104, 256, -19.478, 0, 19.478, 0, 216, 256, -24.3787, -27.3518, 24.3787, 27.3518, 296, 320, -27.3518, -29.1356, 27.3518, 29.1356, 552, 576, -0.594603, -19.6219, 0.594603, 19.6219, 616, 656, 0, 0, 0, 0, 616, 896)
+}
+point_count = 11
+
+[node name="Game" type="Node"]
+script = ExtResource("1_h7ada")
+
+[node name="SlepProcessor" parent="." node_paths=PackedStringArray("game_stage") instance=ExtResource("2_p8eyp")]
+game_stage = NodePath("..")
+
+[node name="Warmup" type="Node" parent="SlepProcessor"]
+script = ExtResource("3_wi6y0")
+cooldown_ticks = 1
+
+[node name="BeginFire" type="Node" parent="SlepProcessor"]
+script = ExtResource("4_4r3go")
+fire_state = true
+cooldown_ticks = 1
+
+[node name="SlepSpawnDrone" type="Node" parent="SlepProcessor"]
+script = ExtResource("5_7e0c3")
+patrol_name = &"TopLeft"
+drone_variant = ExtResource("9_pvb2a")
+cooldown_ticks = 2
+
+[node name="SlepSpawnDrone2" type="Node" parent="SlepProcessor"]
+script = ExtResource("5_7e0c3")
+patrol_name = &"TopRight"
+drone_variant = ExtResource("9_pvb2a")
+
+[node name="Wait" type="Node" parent="SlepProcessor"]
+script = ExtResource("3_wi6y0")
+cooldown_ticks = 5
+
+[node name="CeaseFire" type="Node" parent="SlepProcessor"]
+script = ExtResource("4_4r3go")
+
+[node name="Patrols" type="Node2D" parent="."]
+
+[node name="TopLeft" type="Path2D" parent="Patrols"]
+curve = SubResource("Curve2D_uwjip")
+
+[node name="TopRight" type="Path2D" parent="Patrols"]
+curve = SubResource("Curve2D_auq8r")
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="UpperLeft" type="Marker2D" parent="Spawns"]
+position = Vector2(-64, 64)
+
+[node name="UpperRight" type="Marker2D" parent="Spawns"]
+position = Vector2(744, 64)
+
+[node name="TopLeft" type="Marker2D" parent="Spawns"]
+position = Vector2(128, -64)
+
+[node name="TopRight" type="Marker2D" parent="Spawns"]
+position = Vector2(616, -64)
+
+[node name="TopCenter" type="Marker2D" parent="Spawns"]
+position = Vector2(368, -64)
+
+[node name="MidLeft" type="Marker2D" parent="Spawns"]
+position = Vector2(-64, 384)
+
+[node name="MidRight" type="Marker2D" parent="Spawns"]
+position = Vector2(744, 384)
+
+[node name="LowLeft" type="Marker2D" parent="Spawns"]
+position = Vector2(-64, 704)
+
+[node name="LowRight" type="Marker2D" parent="Spawns"]
+position = Vector2(744, 704)
+
+[node name="PlayField" type="Node2D" parent="."]
+
+[node name="Parallax2D" type="Parallax2D" parent="PlayField"]
+z_index = -5
+scroll_offset = Vector2(0, -512)
+repeat_size = Vector2(1024, 1024)
+autoscroll = Vector2(0, 15)
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayField/Parallax2D"]
+texture = ExtResource("2_jig67")
+centered = false
+
+[node name="PlayerA" parent="PlayField" instance=ExtResource("2_fsmmi")]
+position = Vector2(343, 621)

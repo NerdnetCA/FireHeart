@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dv1ra1v3gthpo"]
+
+[ext_resource type="Script" path="res://screens/menu/menu.gd" id="1_gjde3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gfc81"]
+
+[sub_resource type="Theme" id="Theme_yr8n1"]
+
+[node name="Menu" type="Node"]
+process_mode = 3
+script = ExtResource("1_gjde3")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gfc81")
+
+[node name="PlayButton" type="Button" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_yr8n1")
+theme_override_font_sizes/font_size = 48
+text = "Play"
+
+[connection signal="pressed" from="PanelContainer/PlayButton" to="." method="_on_play_button_pressed"]

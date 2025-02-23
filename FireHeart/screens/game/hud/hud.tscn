@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyw6wbg6h5cc3"]
+
+[ext_resource type="Script" path="res://screens/game/hud/hud.gd" id="1_1h76v"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_leuod"]
+size = Vector2(32, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fdq8i"]
+size = Vector2(128, 32)
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_1h76v")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_leuod")
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_leuod")
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_leuod")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = SubResource("PlaceholderTexture2D_fdq8i")
+
+[node name="LabelGameOver" type="Label" parent="."]
+visible = false
+offset_top = 337.0
+offset_right = 640.0
+offset_bottom = 494.0
+theme_override_font_sizes/font_size = 56
+text = "Game
+Over"
+horizontal_alignment = 1
+
+[node name="LabelReady" type="Label" parent="."]
+visible = false
+offset_top = 337.0
+offset_right = 640.0
+offset_bottom = 494.0
+theme_override_font_sizes/font_size = 56
+text = "Get
+Ready"
+horizontal_alignment = 1
